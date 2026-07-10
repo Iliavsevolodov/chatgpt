@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffd21c" />
+  <meta name="description" content="Практическая инструкция по ChatGPT для жизни, блога, работы и сетевого бизнеса." />
+  <title>ChatGPT — практическая инструкция</title>
+  <style>
+    :root {
+      --paper: #f6f3eb;
+      --white: #fffef9;
+      --ink: #111111;
+      --muted: #66635d;
+      --yellow: #ffd21c;
+      --indigo: #2f2aa8;
+      --line: rgba(17,17,17,.16);
+      --shadow: 0 22px 60px rgba(17,17,17,.12);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(255,210,28,.22), transparent 28%),
+        linear-gradient(180deg, #fff 0%, var(--paper) 100%);
+      color: var(--ink);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(255,254,249,.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: white;
+      border-radius: 12px;
+      font-size: 12px;
+      transform: rotate(-2deg);
+    }
+
+    .nav a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+
+    .hero {
+      padding: 76px 0 48px;
+      display: grid;
+      grid-template-columns: 1.18fr .82fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 13px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      background: var(--white);
+    }
+
+    h1 {
+      margin: 22px 0 20px;
+      font-size: clamp(54px, 8.5vw, 126px);
+      line-height: .82;
+      letter-spacing: -.075em;
+      text-transform: uppercase;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 900;
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+    }
+
+    .highlight::after {
+      content: "";
+      position: absolute;
+      left: -1%;
+      right: -1%;
+      bottom: .06em;
+      height: .17em;
+      background: var(--yellow);
+      z-index: -1;
+      transform: rotate(-1deg);
+    }
+
+    .lead {
+      max-width: 760px;
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 700;
+      letter-spacing: -.03em;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 14px;
+      border: 2px solid var(--ink);
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: .18s ease;
+    }
+    .btn:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--ink); }
+    .btn-primary { background: var(--yellow); }
+    .btn-secondary { background: var(--white); }
+
+    .hero-card {
+      position: relative;
+      min-height: 470px;
+      padding: 34px;
+      background: var(--ink);
+      color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: rotate(1.2deg);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -55px;
+      top: -55px;
+      background: var(--yellow);
+      border-radius: 34% 66% 48% 52%;
+      transform: rotate(19deg);
+    }
+
+    .hero-card .number {
+      position: relative;
+      font-size: clamp(88px, 12vw, 170px);
+      font-weight: 1000;
+      line-height: .9;
+      letter-spacing: -.09em;
+      color: var(--yellow);
+    }
+
+    .hero-card h2 {
+      position: relative;
+      margin: 22px 0 12px;
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-card p { position: relative; color: rgba(255,255,255,.76); font-size: 18px; }
+
+    .section { padding: 72px 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: .65fr 1.35fr;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 32px;
+    }
+
+    .kicker {
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--indigo);
+    }
+
+    h2.section-title {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: .92;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 12px 36px rgba(17,17,17,.07);
+    }
+
+    .card.yellow { background: var(--yellow); border-color: var(--ink); }
+    .card.black { background: var(--ink); color: white; }
+    .card h3 { margin: 0 0 12px; font-size: 28px; line-height: 1.05; letter-spacing: -.035em; }
+    .card p { margin: 0; font-size: 18px; color: var(--muted); }
+    .card.black p { color: rgba(255,255,255,.74); }
+    .card.yellow p { color: rgba(17,17,17,.78); }
+
+    .steps {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+    .step:first-child { border-top: 0; }
+    .step b {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: white;
+      border-radius: 10px;
+    }
+
+    .notice {
+      margin-top: 24px;
+      padding: 24px;
+      border-left: 8px solid var(--yellow);
+      background: #fff;
+      border-radius: 0 18px 18px 0;
+      font-size: 18px;
+    }
+
+    .quote {
+      padding: 54px;
+      background: var(--indigo);
+      color: white;
+      border-radius: 30px;
+      font-size: clamp(30px, 4vw, 58px);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -.05em;
+      box-shadow: var(--shadow);
+    }
+    .quote span { color: var(--yellow); }
+
+    footer {
+      padding: 36px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 44px; }
+      .hero-card { min-height: 350px; transform: none; }
+      .section-head { grid-template-columns: 1fr; }
+      .intro-grid { grid-template-columns: 1fr; }
+      .quote { padding: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="brand-mark">GPT</div>
+        <span>Практическая инструкция</span>
+      </div>
+      <nav class="nav-links" aria-label="Навигация">
+        <a href="#intro">Введение</a>
+        <a href="#start">С чего начать</a>
+        <a href="#important">Важно знать</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">Блог • работа • сетевой бизнес</div>
+        <h1><span class="highlight">ChatGPT</span><br>без сложных слов</h1>
+        <p class="lead">Пошаговая платформа, которая поможет понять возможности ChatGPT и начать использовать его как личного помощника — даже если вы никогда раньше не работали с искусственным интеллектом.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#intro">Начать обучение →</a>
+          <a class="btn btn-secondary" href="#important">Что важно знать</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Главная идея">
+        <div class="number">01</div>
+        <h2>Не волшебная кнопка. Усилитель человека.</h2>
+        <p>ChatGPT ускоряет мышление, помогает формулировать идеи, создавать материалы, анализировать информацию и выполнять рабочие задачи.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="intro">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Введение</div>
+          <h2 class="section-title">Что такое ChatGPT и зачем он вам</h2>
+        </div>
+
+        <div class="intro-grid">
+          <article class="card yellow">
+            <h3>ChatGPT — это диалоговый помощник</h3>
+            <p>Вы общаетесь с ним обычным человеческим языком: задаёте вопрос, описываете задачу, прикрепляете материалы и уточняете результат до тех пор, пока он вас не устроит.</p>
+          </article>
+
+          <article class="card">
+            <h3>Он помогает не только писать тексты</h3>
+            <p>ChatGPT может объяснять сложное простыми словами, искать и структурировать информацию, создавать изображения, работать с файлами, помогать с кодом, идеями, обучением и повседневными решениями.</p>
+          </article>
+
+          <article class="card">
+            <h3>Это партнёр по мышлению</h3>
+            <p>Самая сильная модель работы — не просить «сделай всё за меня», а использовать ChatGPT для обсуждения идей, поиска вариантов, проверки логики и ускорения результата.</p>
+          </article>
+
+          <article class="card black">
+            <h3>Главное преимущество — скорость</h3>
+            <p>То, на что раньше уходили часы: черновик поста, структура выступления, сценарий, анализ документа или план проекта — теперь можно начать за несколько минут.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="start">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Первый принцип</div>
+          <h2 class="section-title">ChatGPT работает лучше, когда понимает контекст</h2>
+        </div>
+
+        <div class="card">
+          <h3>Хороший запрос состоит из четырёх частей</h3>
+          <div class="steps">
+            <div class="step"><b>1</b><div><strong>Роль.</strong> Кем должен выступить ChatGPT: редактором, маркетологом, наставником, аналитиком или дизайнером.</div></div>
+            <div class="step"><b>2</b><div><strong>Контекст.</strong> Кто вы, чем занимаетесь, для кого создаётся результат и что уже известно.</div></div>
+            <div class="step"><b>3</b><div><strong>Задача.</strong> Что именно необходимо получить: текст, план, идеи, анализ, инструкцию или готовый материал.</div></div>
+            <div class="step"><b>4</b><div><strong>Формат.</strong> Объём, стиль, структура, тон общения, ограничения и пример желаемого результата.</div></div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong>Не пытайтесь написать идеальный запрос с первого раза.</strong> Начните диалог, посмотрите на результат и уточняйте: «сделай короче», «добавь примеры», «напиши живее», «задай мне вопросы, чтобы улучшить ответ».
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="important">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Важно знать</div>
+          <h2 class="section-title">ChatGPT может ошибаться</h2>
+        </div>
+
+        <div class="intro-grid">
+          <article class="card">
+            <h3>Проверяйте важные факты</h3>
+            <p>Модель иногда уверенно формулирует неточную информацию. Проверяйте даты, цифры, цитаты, медицинские, юридические и финансовые сведения по надёжным источникам.</p>
+          </article>
+
+          <article class="card">
+            <h3>Используйте поиск и источники</h3>
+            <p>Для свежей информации просите выполнить поиск в интернете и приложить источники. Затем открывайте ссылки и проверяйте самые важные утверждения самостоятельно.</p>
+          </article>
+
+          <article class="card">
+            <h3>Не отправляйте секретные данные</h3>
+            <p>Не вставляйте пароли, банковские реквизиты, персональные данные клиентов и конфиденциальные документы без необходимости и понимания настроек приватности.</p>
+          </article>
+
+          <article class="card yellow">
+            <h3>Ответственность остаётся у человека</h3>
+            <p>ChatGPT помогает подготовить решение, но окончательный выбор, проверка качества и публикация результата всегда остаются за вами.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="quote">Не нужно знать всё об искусственном интеллекте. Нужно научиться <span>ставить ему понятные задачи</span>.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Илья Всеволодов</strong> · Практическая инструкция по ChatGPT<br>
+      Материалы платформы будут постепенно дополняться новыми разделами и примерами.
+    </div>
+  </footer>
+</body>
+</html>
